@@ -7,7 +7,7 @@ public class Duckie : MonoBehaviour {
 
         enum Direction
     {
-        north, south, este, oeste
+        north, south, east, west
     }
     #endregion
     Direction direc;
