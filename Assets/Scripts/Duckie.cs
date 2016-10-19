@@ -7,14 +7,16 @@ public class Duckie : MonoBehaviour {
 
         enum Direction
     {
-        north, south, east, west
+        north, south, east, west, northeast,northwest, southeast, southwest
     }
     #endregion
     Direction direc;
+    private static float Velocidad = 2f;
     // Use this for initialization
     void Start () {
         //gameObject.SetActive(false);
         InvokeRepeating("MovDuck", 1f,6f);
+        
         LeavingGrass();
 	
 	}
@@ -22,8 +24,25 @@ public class Duckie : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        
-	}
+        switch (direc)
+        {
+            case Direction.north:
+                transform.Translate(0, (Velocidad * Time.deltaTime), 0);
+                break;
+
+            case Direction.south:
+                transform.Translate(0, -1 * (Velocidad * Time.deltaTime), 0);
+                break;
+
+            case Direction.east:
+                transform.Translate((Velocidad * Time.deltaTime), 0, 0);
+                break;
+
+            case Direction.west:
+                transform.Translate(-1 * (Velocidad * Time.deltaTime), 0, 0);
+                break;
+        }
+    }
 
     void LeavingGrass()
     {
@@ -34,13 +53,26 @@ public class Duckie : MonoBehaviour {
     {
 
     }
-
+    
     void MovDuck()
     {
-        //gameObject.SetActive(true);
-        float randX = Random.Range(-3f, 3f);
-        float randY = Random.Range(-1f, 4.5f);
-        gameObject.transform.position = new Vector3(randX, randY);
-        gameObject.transform.Translate(gameObject.transform.position.x, gameObject.transform.position.y,0);
+        switch (Random.Range(0, 4))
+        {
+            case 0:
+                direc = Direction.north;
+                break;
+            case 1:
+                direc = Direction.east;
+                break;
+            case 2:
+                direc = Direction.south;
+                break;
+            case 3:
+                direc = Direction.west;
+                break;
+        }
+
     }
+
+   
 }
